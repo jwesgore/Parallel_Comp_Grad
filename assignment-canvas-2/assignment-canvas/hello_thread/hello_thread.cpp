@@ -11,10 +11,12 @@ int main (int argc, char* argv[]) {
     return -1;
   }
   
-  char hostname[HOST_NAME_MAX + 1];
-	gethostname(hostname, HOST_NAME_MAX + 1);
+  // command line parameter
+  int n;
+  n = atoi(argv[1]);
 
-	printf("%s\n", hostname);
+  printf("I am thread %d in nbthreads", n);
+
 
 	return 0;
 
