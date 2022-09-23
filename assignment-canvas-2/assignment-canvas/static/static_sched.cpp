@@ -120,7 +120,7 @@ int main (int argc, char* argv[]) {
       remainder--;
       point++;
     }
-    
+
     point += spread;
     threadData[i].end = point;
     if (sync.compare(type) == 0) 
