@@ -50,12 +50,12 @@ int main (int argc, char* argv[]) {
     // insert reduction code here
     if (granularity > 0) {
         if (scheduling == "dynamic") {
-            #pragma omp parallel for schedule(dynamic, granularity) num_threads(threads)
+            #pragma omp parallel for shared(sum) schedule(dynamic, granularity) num_threads(threads)
             for (int i = 0; i < n; i++) {
                 sum += arr[i];
             }
         } else {
-            #pragma omp parallel for schedule(static, granularity) num_threads(threads)
+            #pragma omp parallel for shared(sum) schedule(static, granularity) num_threads(threads)
             for (int i = 0; i < n; i++) {
                 sum += arr[i];
             }
