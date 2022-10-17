@@ -6,7 +6,7 @@
 #include <sys/time.h>
 #include <fcntl.h>
 #include <unistd.h>
-
+#include <chrono>
 
 
 #ifdef __cplusplus
@@ -43,35 +43,35 @@ int main (int argc, char* argv[]) {
     int threads = atoi(argv[2]);
     char *scheduling = argv[3];
     int granularity = atoi(argv[4]);
-    struct timeval start, end;
-    int sumLocal = 0;
 
     generateReduceData (arr, atoi(argv[1]));
-    
-    gettimeofday(&start, NULL);
+    std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
     omp_set_num_threads(threads);
 
     // insert reduction code here
-        granularity <= 0 ? granularity = 1 : NULL;
 
-        if (scheduling == "dynamic") {
-            #pragma omp parallel for schedule(dynamic, granularity) reduction(+:sum)
-            for (int i = 0; i < n; i++) {
-                sum += arr[i];
-            }
-        } else {
-            #pragma omp parallel for schedule(static, granularity) reduction(+:sum)
-            for (int i = 0; i < n; i++)
-                sum += arr[i];
-        
+    if (granularity <= 0) granularity = 1;
+    
+    if (scheduling == "dynamic") {
+        #pragma omp parallel for schedule(dynamic, granularity) reduction(+:sum)
+        for (int i = 0; i < n; i++) {
+            sum += arr[i];
         }
+    } else {
+        #pragma omp parallel for schedule(static, granularity) reduction(+:sum)
+        for (int i = 0; i < n; i++)
+            sum += arr[i];
+    }
     
     
     
-    gettimeofday(&end, NULL);
-    double last_time = (end.tv_sec-start.tv_sec + (end.tv_usec - start.tv_usec)/1000000);
+    std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+
+    std::chrono::duration<double> elapsed_seconds = end-start;
+    
     std::cout << sum << std::endl;
-    std::cerr << last_time << std::endl;
+    
+    std::cerr<<elapsed_seconds.count()<<std::endl;
 
     delete[] arr;
     
