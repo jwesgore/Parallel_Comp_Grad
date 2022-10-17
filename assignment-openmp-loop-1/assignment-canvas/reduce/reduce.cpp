@@ -48,7 +48,7 @@ int main (int argc, char* argv[]) {
     gettimeofday(&start, NULL);
 
     // insert reduction code here
-    if (granularity <= 0) granularity = 1;
+    //if (granularity <= 0) granularity = 1;
 
     if (scheduling == "dynamic") {
         #pragma omp parallel for schedule(dynamic, granularity) num_threads(threads)
