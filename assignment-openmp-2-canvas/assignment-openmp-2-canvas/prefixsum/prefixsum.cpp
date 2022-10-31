@@ -50,10 +50,11 @@ int main (int argc, char* argv[]) {
   //insert prefix sum code here
 
   omp_set_num_threads(nbThreads);
-  
+  int chunksize = n / nbThreads;
+
   #pragma omp parallel
   {
-    #pragma omp parallel for schedule(static)
+    #pragma omp parallel for schedule(dynamic, chunksize)
     for (int i = 0; i < n; i++) {
       pr[i + 1] = pr[i] + arr[i];
     }
