@@ -48,19 +48,49 @@ int main (int argc, char* argv[]) {
   int * pr = new int [n+1];
 
   //insert prefix sum code here
-
+  
+  // initialize some values
   omp_set_num_threads(nbThreads);
-  int chunksize = n / nbThreads;
-
-  #pragma omp parallel
+  int threadPartialSums [nbThreads];
+  
+  #pragma omp parallel 
   {
-    #pragma omp parallel for schedule(dynamic, chunksize)
+    // initialize some values
+    int thread = omp_get_thread_num();
+    int threadPartialSum = 0;
+    int fix = 0;
+
+    // set all values to 0 in pr
+    #pragma omp for
     for (int i = 0; i < n; i++) {
-      pr[i + 1] = pr[i] + arr[i];
+      pr[i] = 0;
     }
+
+    // calculate partial prefix sums
+    #pragma omp for schedule(static) nowait
+    for (int i = 0; i < n; i++) {
+      threadPartialSum += arr[i];
+      pr[i + 1] = threadPartialSum; 
+    }
+
+    threadPartialSums[thread] = threadPartialSum; // store values in shared array
+
+    #pragma omp barrier // wait before fixing
+    
+    //calculate fix
+    for (int i = thread; i > 0; i--) {
+      fix += threadPartialSums[i - 1];
+    }
+    
+    // apply fix
+    #pragma omp for schedule(static) nowait
+    for (int i = 0; i < n; i++) {
+      pr[i + 1] += fix;
+    }
+
   }
 
-
+  
   // start timing
   std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
 
