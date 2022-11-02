@@ -20,7 +20,7 @@ extern "C" {
 }
 #endif
 
-int const TASKSIZE = 100;
+int const TASKSIZE = 1000;
 
 void merge(int* arr, int left, int right, int mid) {
   
