@@ -20,6 +20,8 @@ extern "C" {
 }
 #endif
 
+int const TASKSIZE = 100;
+
 void merge(int* arr, int left, int right, int mid) {
   
   std::vector <int> leftVector, rightVector;
@@ -62,10 +64,10 @@ void mergeSort(int* arr, int left, int right) {
   
   if (left >= right) return;
 
-  #pragma omp task shared(arr)
+  #pragma omp task shared(arr) if (right - left > TASKSIZE)
   mergeSort(arr, left, mid);
 
-  #pragma omp task shared(arr)
+  #pragma omp task shared(arr) if (right - left > TASKSIZE)
   mergeSort(arr, mid + 1, right);
 
   #pragma omp taskwait
