@@ -20,8 +20,6 @@ extern "C" {
 }
 #endif
 
-int const TASKSIZE = 1000;
-
 void merge(int* arr, int left, int right, int mid) {
   
   std::vector <int> leftVector, rightVector;
@@ -57,6 +55,8 @@ void merge(int* arr, int left, int right, int mid) {
   }
 
 }
+
+int TASKSIZE = 1000;
 
 void mergeSort(int* arr, int left, int right) {
   
@@ -105,6 +105,8 @@ int main (int argc, char* argv[]) {
 
   std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
   //insert sorting code here.
+
+  if (n / numThreads < 1) TASKSIZE = 100;
 
   omp_set_num_threads(numThreads);
   #pragma omp parallel
