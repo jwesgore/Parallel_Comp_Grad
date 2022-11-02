@@ -99,7 +99,7 @@ int main (int argc, char* argv[]) {
   std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
   std::chrono::duration<double> elapased_seconds = end-start;
   //Print the total execution time (in sec) to the error stream
-  cerr<<elapased_seconds.count()<<std::endl;
+  std::cerr<<elapased_seconds.count()<<std::endl;
 
   checkPrefixSumResult(pr, n);
 
