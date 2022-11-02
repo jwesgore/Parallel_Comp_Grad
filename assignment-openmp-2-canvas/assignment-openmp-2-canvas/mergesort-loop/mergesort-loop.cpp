@@ -135,13 +135,11 @@ int main (int argc, char* argv[]) {
       int left, right, mid;
 
       left = i * groupsize;  // left index of first subgroup 
-      
       right = ((1+i) * groupsize) - 1; // right index of last subgroup
       if (right >= numThreads) right = numThreads - 1;
-      
       mid = left + (groupsize / 2);   // right index of middle subgroup
 
-      if (left != right) 
+      if (left != right && mid <= right) 
         merge(arr,leftsplits[left],rightsplits[right],leftsplits[mid] - 1);
     }
     groupsize = groupsize * 2;
