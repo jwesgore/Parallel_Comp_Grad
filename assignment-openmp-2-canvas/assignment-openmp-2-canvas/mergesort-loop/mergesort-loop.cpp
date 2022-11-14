@@ -145,12 +145,6 @@ int main (int argc, char* argv[]) {
     groupsize = groupsize * 2;
   }
 
-  // for (int i = 0; i < n ; i++) {
-  //   std::cout << arr[i] << ", ";
-  // }
-  
-  // std::cout<<std::endl;
-
   //printArray(arr, n);
   // end time
   std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
