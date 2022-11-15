@@ -31,7 +31,7 @@ fi
 while read test; 
 do
     t=($test)
-    ANSW=$(srun --time=00:05:00 --ntasks=${t[1]} ./mpi_num_int 1 0 10 ${t[0]} ${t[2]} 2> .time < /dev/null)
+    ANSW=$(srun --partition=Centaurus --time=00:05:00 --ntasks=${t[1]} ./mpi_num_int 1 0 10 ${t[0]} ${t[2]} 2> .time < /dev/null)
 
     process_time_file .time
 
