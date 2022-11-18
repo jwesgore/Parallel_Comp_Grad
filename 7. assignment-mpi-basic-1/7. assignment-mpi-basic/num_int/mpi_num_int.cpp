@@ -36,7 +36,7 @@ ptr getFunction(int f) {
 int main (int argc, char* argv[]) {
 
   // start timer
-  //std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
+  std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
   
   if (argc < 6) {
     std::cerr<<"usage: "<<argv[0]<<" <functionid> <a> <b> <n> <intensity>"<<std::endl;
@@ -57,7 +57,7 @@ int main (int argc, char* argv[]) {
   int size, rank;
 
   // start timer
-  std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
+  //std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
 
   MPI_Comm_size(MPI_COMM_WORLD, &size);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
