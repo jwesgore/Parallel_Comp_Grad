@@ -9,11 +9,11 @@ function test_time {
     then
         echo ERROR: time is not on stderr or not formatted properly
         echo
-        rm .time
+        
         exit 1
     fi
     # delete tmp file 
-    rm .time
+    
 }
 
 SUCCESS_FILE=.passed_mpi_numint
