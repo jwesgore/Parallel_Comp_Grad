@@ -43,7 +43,7 @@ int main (int argc, char* argv[]) {
     return -1;
   }
 
-  double result = 0; // init result
+  double result = 0.0; // init result
   float (*ptr)(float, int) = getFunction(atoi(argv[1])); // get function
   
   int a = atoi(argv[2]);
@@ -55,9 +55,9 @@ int main (int argc, char* argv[]) {
   // MPI start
   MPI_Init(&argc, &argv);
   int size, rank;
+
   // start timer
   std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
-  
 
   MPI_Comm_size(MPI_COMM_WORLD, &size);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -67,7 +67,7 @@ int main (int argc, char* argv[]) {
   int loop_end = (rank + 1) * (n / size);
   if (size - 1 == rank) loop_end = n;
 
-  double rank_val = 0;
+  double rank_val = 0.0;
 
   // calculate all values
   for (int i = loop_start; i < loop_end; i++) {
@@ -87,7 +87,7 @@ int main (int argc, char* argv[]) {
 
     // print results
     std::cout << result << std::endl;
-    std::cerr<<elapsed_seconds.count()<<std::endl;
+    std::cerr << elapsed_seconds.count() << std::endl;
   }
 
   MPI_Finalize();
