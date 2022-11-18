@@ -2,18 +2,19 @@
 
 # does not account for neg numbers
 sci_notation_regex='^[0-9]+([.][0-9]+)?(e[0-9]+|e-[0-9]+)?$'
+slurm='^srun:'
 
 function test_time {
     # compare 
-    if [[ ! $1 =~ $sci_notation_regex ]] ; 
+    if { [ ! $1 =~ $sci_notation_regex ] || [[ ! $1 =~ $slurm ] && [ ! $3 =~ $sci_notation_regex ]] } ; 
     then
         echo ERROR: time is not on stderr or not formatted properly
         echo
-        
+        rm .time
         exit 1
     fi
     # delete tmp file 
-    
+    rm .time
 }
 
 SUCCESS_FILE=.passed_mpi_numint
