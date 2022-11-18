@@ -82,9 +82,7 @@ int main (int argc, char* argv[]) {
 
   // print on rank 0
   if (rank == 0) {
-    // get runtime
-    std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
-    std::chrono::duration<double> elapsed_seconds = end-start;
+    
 
     // print results
     std::cout << result << std::endl;
@@ -93,6 +91,9 @@ int main (int argc, char* argv[]) {
 
   MPI_Finalize();
 
+  // get runtime
+  std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+  std::chrono::duration<double> elapsed_seconds = end-start;
   std::cerr << elapsed_seconds.count() << std::endl;
 
   return 0;
