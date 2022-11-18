@@ -6,7 +6,7 @@ slurm='^srun:'
 
 function test_time {
     # compare 
-    if { [ ! $1 =~ $sci_notation_regex ] || [[ ! $1 =~ $slurm ] && [ ! $3 =~ $sci_notation_regex ]] } ; 
+    if [ [ ! $1 =~ $sci_notation_regex ] || [[ ! $1 =~ $slurm ] && [ ! $3 =~ $sci_notation_regex ]] ] ; 
     then
         echo ERROR: time is not on stderr or not formatted properly
         echo
