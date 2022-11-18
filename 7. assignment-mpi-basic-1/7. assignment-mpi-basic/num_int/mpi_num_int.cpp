@@ -37,7 +37,7 @@ ptr getFunction(int f) {
 int main (int argc, char* argv[]) {
 
   // start timer
-  std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
+  auto start = std::chrono::system_clock::now();
   
   if (argc < 6) {
     std::cerr<<"usage: "<<argv[0]<<" <functionid> <a> <b> <n> <intensity>"<<std::endl;
@@ -85,7 +85,7 @@ int main (int argc, char* argv[]) {
   // print on rank 0
   if (rank == 0) {
     // get runtime
-    std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+    auto end = std::chrono::system_clock::now();
     std::chrono::duration<double> elapsed_seconds = end-start;
 
     // print results
