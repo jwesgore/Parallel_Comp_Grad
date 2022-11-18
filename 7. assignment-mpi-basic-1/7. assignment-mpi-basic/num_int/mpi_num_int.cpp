@@ -38,7 +38,7 @@ int main (int argc, char* argv[]) {
 
   // start timer
   //std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
-  
+  std::cerr << .005 << std::endl;
   if (argc < 6) {
     std::cerr<<"usage: "<<argv[0]<<" <functionid> <a> <b> <n> <intensity>"<<std::endl;
     return -1;
@@ -90,7 +90,7 @@ int main (int argc, char* argv[]) {
 
     // print results
     std::cout << result << std::endl;
-    std::cerr << elapsed_seconds.count() << std::endl;
+    //std::cerr << elapsed_seconds.count() << std::endl;
   }
 
   return 0;
