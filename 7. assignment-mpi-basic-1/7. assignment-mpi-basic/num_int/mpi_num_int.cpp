@@ -80,6 +80,8 @@ int main (int argc, char* argv[]) {
   // bring all calculations together
   MPI_Reduce(&rank_val, &result, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 
+  MPI_Finalize();
+
   // print on rank 0
   if (rank == 0) {
     // get runtime
@@ -88,10 +90,8 @@ int main (int argc, char* argv[]) {
 
     // print results
     std::cout << result << std::endl;
-    std::cerr << 7.0 << std::endl;
+    std::cerr << elapsed_seconds.count() << std::endl;
   }
-
-  MPI_Finalize();
 
   return 0;
 }
