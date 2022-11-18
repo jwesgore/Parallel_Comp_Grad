@@ -37,7 +37,7 @@ ptr getFunction(int f) {
 int main (int argc, char* argv[]) {
 
   // start timer
-  std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
+  //std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
   
   if (argc < 6) {
     std::cerr<<"usage: "<<argv[0]<<" <functionid> <a> <b> <n> <intensity>"<<std::endl;
@@ -58,7 +58,7 @@ int main (int argc, char* argv[]) {
   int size, rank;
 
   // start timer
-  //std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
+  std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
 
   MPI_Comm_size(MPI_COMM_WORLD, &size);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -82,19 +82,16 @@ int main (int argc, char* argv[]) {
 
   // print on rank 0
   if (rank == 0) {
-    
+    // get runtime
+    std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_seconds = end-start;
 
     // print results
     std::cout << result << std::endl;
-    
+    std::cerr << elapsed_seconds.count() << std::endl;
   }
 
   MPI_Finalize();
-
-  // get runtime
-  std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
-  std::chrono::duration<double> elapsed_seconds = end-start;
-  std::cerr << elapsed_seconds.count() << std::endl;
 
   return 0;
 }
