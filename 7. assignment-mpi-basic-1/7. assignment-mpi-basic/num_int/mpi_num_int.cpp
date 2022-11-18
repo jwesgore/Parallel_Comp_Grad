@@ -86,7 +86,7 @@ int main (int argc, char* argv[]) {
     std::chrono::duration<double> elapsed_seconds = end-start;
 
     // print results
-    std::cout << (float) result << std::endl;
+    std::cout << result << std::endl;
     std::cerr<<elapsed_seconds.count()<<std::endl;
   }
 
