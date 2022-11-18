@@ -90,7 +90,7 @@ int main (int argc, char* argv[]) {
 
     // print results
     std::cout << result << std::endl;
-    //std::cerr << elapsed_seconds.count() << std::endl;
+    std::cerr << elapsed_seconds.count() << std::endl;
   }
 
   return 0;
