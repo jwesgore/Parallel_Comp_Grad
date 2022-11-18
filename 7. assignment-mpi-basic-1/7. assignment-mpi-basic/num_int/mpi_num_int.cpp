@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <stdio.h>
 #include <cstdlib>
 #include <chrono>
 #include <mpi.h>
