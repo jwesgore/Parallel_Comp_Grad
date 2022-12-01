@@ -73,7 +73,7 @@ double master(int size, int n) {
 }
 
 // worker method
-double worker(float* ptr, float co, int a, int intensity, int n){
+void worker(float* ptr, float co, int a, int intensity, int n){
 
   MPI_Status status;
   int loop[] = {0};
