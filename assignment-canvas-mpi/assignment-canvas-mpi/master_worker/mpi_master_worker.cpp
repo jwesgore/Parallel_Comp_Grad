@@ -98,7 +98,7 @@ void worker(int fid, float co, int a, int intensity, int n){
 
       rank_val *= co;
 
-      MPI_Send(rank_val, 1, MPI_DOUBLE, 0, MPI_ANY_TAG, MPI_COMM_WORLD); // send back results
+      MPI_Send(&rank_val, 1, MPI_DOUBLE, 0, MPI_ANY_TAG, MPI_COMM_WORLD); // send back results
     }
   }
 }
