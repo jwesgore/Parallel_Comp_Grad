@@ -65,7 +65,7 @@ double master(int size, int n) {
     position+= granularity; // adjust position
   }
 
-  for (i = 1; i < size; i++) {
+  for (int i = 1; i < size; i++) {
     MPI_Send(0, 0, MPI_INT, i, 0, MPI_COMM_WORLD); // send ending message
   }
 
@@ -75,7 +75,7 @@ double master(int size, int n) {
 // worker method
 double worker(float* ptr, float co, int a, int intensity, int n){
 
-  MPI_STATUS status;
+  MPI_Status status;
   int loop[] = {0};
   
   while (true) {
