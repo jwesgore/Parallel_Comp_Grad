@@ -34,7 +34,9 @@ double master(int size, int n) {
 
   MPI_Status status;
 
-  int position = 0;
+  int position        = 0;
+  double result       = 0.0;
+  double rank_result  = 0.0;
 
   // get granularity
   int granularity = n / (size * size);
@@ -74,6 +76,7 @@ double master(int size, int n) {
 double worker(float* ptr, float co, int a, int intensity, int n){
 
   MPI_STATUS status;
+  int loop[] = {0};
   
   while (true) {
     
