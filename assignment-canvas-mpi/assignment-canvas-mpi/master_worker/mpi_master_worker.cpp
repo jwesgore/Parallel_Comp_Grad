@@ -74,10 +74,12 @@ double master(int size, int n) {
 }
 
 // worker method
-void worker(float (*)(float,int) ptr, float co, int a, int intensity, int n){
+void worker(int fid, float co, int a, int intensity, int n){
 
   MPI_Status status;
   int loop[] = {0};
+
+  float (*ptr)(float, int) = getFunction(fid); // get function
   
   while (true) {
     
@@ -113,7 +115,7 @@ int main (int argc, char* argv[]) {
   auto start = std::chrono::system_clock::now();
 
   double result = 0.0; // init result
-  float (*ptr)(float, int) = getFunction(atoi(argv[1])); // get function
+  int fid = atoi(argv[1]); // get function
   
   int a = atoi(argv[2]);
   int b = atoi(argv[3]);
@@ -129,7 +131,7 @@ int main (int argc, char* argv[]) {
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
   if (rank == 0) result = master(size, n);
-  else worker(ptr, co, a, intensity, n);
+  else worker(fid, co, a, intensity, n);
 
   // print on rank 0
   if (rank == 0) {
