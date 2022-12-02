@@ -53,7 +53,7 @@ double master(int size, int n) {
   }
 
   // send further batches of work
-  while (position < n) {
+  while (position <= n) {
    
     MPI_Recv(&rank_result, 1, MPI_DOUBLE, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status); // receive value
     result += rank_result; // add value into result
