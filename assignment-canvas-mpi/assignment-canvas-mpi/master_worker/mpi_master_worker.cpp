@@ -41,7 +41,7 @@ double master(int size, int n) {
   double rank_result  = 0.0;
 
   // get granularity
-  int granularity = 50;
+  int granularity = n / ((size - 1)(size - 1));
   if (granularity < 1) granularity = 1;
 
   // send initial batch of work
@@ -65,11 +65,14 @@ double master(int size, int n) {
     if (position < n) {
       int rank_id = status.MPI_SOURCE; // get which rank to send to
 
-      int loop[] = {position, position + granularity}; // get loop start and end
-      MPI_Send(loop, 2, MPI_INT, rank_id, 0, MPI_COMM_WORLD); // send next job
-      work_running++;
-      
-      position+= granularity; // adjust position
+      for (int i = 0; i < 3; i++) {
+        if (position >= n) break; // break if position gets too large
+        int loop[] = {position, position + granularity}; // get loop start and end
+        MPI_Send(loop, 2, MPI_INT, rank_id, 0, MPI_COMM_WORLD); // send next job
+        work_running++;
+
+        position+= granularity; // adjust position
+      }
     }
   }
 
