@@ -1,2 +1,1 @@
-srun: error: gal-c2: task 0: Floating point exception (core dumped)
-srun: launch/slurm: _step_signal: Terminating StepId=54328.10
+0.0227645
