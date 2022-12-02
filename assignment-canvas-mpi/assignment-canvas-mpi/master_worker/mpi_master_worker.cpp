@@ -81,7 +81,9 @@ void worker(int fid, float co, int a, int intensity, int n){
 
   float (*ptr)(float, int) = getFunction(fid); // get function
   
-  while (true) {
+  std::cout << "bones" << std::endl;
+
+  while (1) {
     
     // get start and end and store in loop[]
     MPI_Recv(loop, 2, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
