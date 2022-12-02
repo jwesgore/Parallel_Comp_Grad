@@ -40,7 +40,7 @@ double master(int size, int n) {
   double rank_result  = 0.0;
 
   // get granularity
-  int granularity = 50;
+  int granularity = n / (size - 1);
   if (granularity < 1) granularity = 1;
 
   // send initial batch of work
