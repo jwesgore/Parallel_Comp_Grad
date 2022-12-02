@@ -88,7 +88,7 @@ void worker(int fid, float co, int a, int intensity, int n){
     
     if (status.MPI_TAG == 69) return; // end if no work
     else { 
-      std::cout << MPI_COMM_RANK << std::endl;
+      std::cout << "MPI_COMM_RANK" << std::endl;
       // calculate all values
       double rank_val = 0.0;
       if (loop[1] > n) loop[1] = n; 
