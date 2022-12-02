@@ -133,9 +133,11 @@ int main (int argc, char* argv[]) {
   MPI_Comm_size(MPI_COMM_WORLD, &size);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-  if (rank == 0) result = master(size, n);
-  else worker(fid, co, a, intensity, n);
-
+  if (rank == 0) {result = master(size, n);}
+  else {
+    std::cout << "bluh" << std::endl;
+    worker(fid, co, a, intensity, n);
+  }
   // print on rank 0
   if (rank == 0) {
     // get runtime
