@@ -81,16 +81,16 @@ void worker(int fid, float co, int a, int intensity, int n){
 
   float (*ptr)(float, int) = getFunction(fid); // get function
   
-  std::cout << "bones" << std::endl;
+  std::cout << MPI_COMM_RANK << " running: start" << std::endl;
 
   while (1) {
     
     // get start and end and store in loop[]
     MPI_Recv(loop, 2, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
-    std::cout << "Hello" << std::endl;
+    std::cout << MPI_COMM_RANK << " running: in loop" << std::endl;
     if (status.MPI_TAG == 69) {return;} // end if no work
     else { 
-      std::cout << "MPI_COMM_RANK" << std::endl;
+      std::cout << MPI_COMM_RANK << " running: calculating" << std::endl;
       // calculate all values
       double rank_val = 0.0;
       if (loop[1] > n) loop[1] = n; 
@@ -100,6 +100,8 @@ void worker(int fid, float co, int a, int intensity, int n){
       }
 
       rank_val *= co;
+
+      std::cout << MPI_COMM_RANK << " running: " << rank_val << std::endl;
 
       MPI_Send(&rank_val, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD); // send back results
     }
@@ -132,7 +134,7 @@ int main (int argc, char* argv[]) {
 
   MPI_Comm_size(MPI_COMM_WORLD, &size);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  
+
   if (rank == 0) result = master(size, n);
   else worker(fid, co, a, intensity, n);
 
