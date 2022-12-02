@@ -35,6 +35,7 @@ double master(int size, int n) {
 
   MPI_Status status;
 
+  int work_running    = 0;
   int position        = 0;
   double result       = 0.0;
   double rank_result  = 0.0;
@@ -49,21 +50,27 @@ double master(int size, int n) {
 
     int loop[] = {position, position + granularity}; // get loop start and end
     MPI_Send(loop, 2, MPI_INT, i, 0, MPI_COMM_WORLD); // send first job
-    position+= granularity; // adjust position
+    work_running++;
+    position += granularity; // adjust position
   }
 
   // send further batches of work
-  while (position <= n) {
+  while (work_running > 0) {
    
     MPI_Recv(&rank_result, 1, MPI_DOUBLE, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status); // receive value
+    work_running--;
+
     result += rank_result; // add value into result
 
-    int rank_id = status.MPI_SOURCE; // get which rank to send to
+    if (position < n) {
+      int rank_id = status.MPI_SOURCE; // get which rank to send to
 
-    int loop[] = {position, position + granularity}; // get loop start and end
-    MPI_Send(loop, 2, MPI_INT, rank_id, 0, MPI_COMM_WORLD); // send next job
-
-    position+= granularity; // adjust position
+      int loop[] = {position, position + granularity}; // get loop start and end
+      MPI_Send(loop, 2, MPI_INT, rank_id, 0, MPI_COMM_WORLD); // send next job
+      work_running++;
+      
+      position+= granularity; // adjust position
+    }
   }
 
   for (int i = 1; i < size; i++) {
