@@ -80,6 +80,10 @@ void worker(int fid, float co, int a, int intensity, int n){
   int loop[] = {0};
 
   float (*ptr)(float, int) = getFunction(fid); // get function
+
+  int rank;
+
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   
   while (1) {
     
@@ -88,7 +92,7 @@ void worker(int fid, float co, int a, int intensity, int n){
 
     if (status.MPI_TAG == 69) {return;} // end if no work
     else { 
-
+      
       // calculate all values
       double rank_val = 0.0;
       if (loop[1] > n) loop[1] = n; 
