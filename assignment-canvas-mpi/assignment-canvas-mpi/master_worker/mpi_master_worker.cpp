@@ -80,10 +80,6 @@ void worker(int fid, float co, int a, int intensity, int n){
   int loop[] = {0};
 
   float (*ptr)(float, int) = getFunction(fid); // get function
-
-  int rank;
-
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   
   while (1) {
     
