@@ -1,0 +1,2 @@
+starting time is Thu Dec 1 20:13:14 EST 2022
+slurmstepd: error: *** JOB 53599 ON gal-c2 CANCELLED AT 2022-12-01T20:33:15 DUE TO TIME LIMIT ***
