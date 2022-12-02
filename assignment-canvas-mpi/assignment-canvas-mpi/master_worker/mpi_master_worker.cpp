@@ -67,7 +67,7 @@ double master(int size, int n) {
   }
 
   for (int i = 1; i < size; i++) {
-    MPI_Send(0, 0, MPI_INT, i, 0, MPI_COMM_WORLD); // send ending message
+    MPI_Send(0, 0, MPI_INT, i, EXIT, MPI_COMM_WORLD); // send ending message
   }
 
   return result;
@@ -86,7 +86,7 @@ void worker(int fid, float co, int a, int intensity, int n){
     // get start and end and store in loop[]
     MPI_Recv(loop, 2, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
     
-    if (status.MPI_TAG == 0) return; // end if no work
+    if (status.MPI_TAG == EXIT) return; // end if no work
     else { 
       // calculate all values
       double rank_val = 0.0;
