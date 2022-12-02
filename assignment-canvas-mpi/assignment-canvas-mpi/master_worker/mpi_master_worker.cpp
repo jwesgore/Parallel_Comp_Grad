@@ -40,7 +40,7 @@ double master(int size, int n) {
   double rank_result  = 0.0;
 
   // get granularity
-  int granularity = n / (size - 1);
+  int granularity = 50;
   if (granularity < 1) granularity = 1;
 
   // send initial batch of work
@@ -82,7 +82,6 @@ void worker(int fid, float co, int a, int intensity, int n){
   float (*ptr)(float, int) = getFunction(fid); // get function
 
   int rank;
-
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   
   while (1) {
