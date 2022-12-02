@@ -86,7 +86,7 @@ void worker(int fid, float co, int a, int intensity, int n){
     // get start and end and store in loop[]
     MPI_Recv(loop, 2, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
     
-    if (status.MPI_TAG == 69) return; // end if no work
+    if (status.MPI_TAG == 69) {return;} // end if no work
     else { 
       std::cout << "MPI_COMM_RANK" << std::endl;
       // calculate all values
