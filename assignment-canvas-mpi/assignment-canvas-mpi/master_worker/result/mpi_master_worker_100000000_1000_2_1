@@ -1,5 +1,1 @@
-slurmstepd: error: *** STEP 53599.11 ON gal-c2 CANCELLED AT 2022-12-01T20:33:15 DUE TO TIME LIMIT ***
-srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
-srun: error: gal-c3: task 1: Terminated
-srun: launch/slurm: _step_signal: Terminating StepId=53599.11
-srun: error: gal-c2: task 0: Terminated
+466.605
