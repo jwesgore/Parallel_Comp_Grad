@@ -55,7 +55,7 @@ double master(int size, int n) {
   // send further batches of work
   while (position < n) {
    
-    MPI_Recv(&rank_result, 1, MPI_DOUBLE, MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, &status); // receive value
+    MPI_Recv(&rank_result, 1, MPI_DOUBLE, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status); // receive value
     result += rank_result; // add value into result
 
     int rank_id = status.MPI_SOURCE; // get which rank to send to
@@ -98,7 +98,7 @@ void worker(int fid, float co, int a, int intensity, int n){
 
       rank_val *= co;
 
-      MPI_Send(&rank_val, 1, MPI_DOUBLE, 0, MPI_ANY_TAG, MPI_COMM_WORLD); // send back results
+      MPI_Send(&rank_val, 1, MPI_DOUBLE, 0, 1, MPI_COMM_WORLD); // send back results
     }
   }
 }
