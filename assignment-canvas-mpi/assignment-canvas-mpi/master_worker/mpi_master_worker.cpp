@@ -40,7 +40,7 @@ double master(int size, int n) {
   double rank_result  = 0.0;
 
   // get granularity
-  int granularity = n / (size * size);
+  int granularity = 50;
   if (granularity < 1) granularity = 1;
 
   // send initial batch of work
@@ -114,9 +114,9 @@ int main (int argc, char* argv[]) {
   // start timer
   auto start = std::chrono::system_clock::now();
 
-  double result = 10.0; // init result
+  double result = 0.0; // init result
   int fid = atoi(argv[1]); // get function
-  
+   
   int a = atoi(argv[2]);
   int b = atoi(argv[3]);
   int n = atoi(argv[4]);
