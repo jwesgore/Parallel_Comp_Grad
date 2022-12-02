@@ -114,7 +114,7 @@ int main (int argc, char* argv[]) {
   // start timer
   auto start = std::chrono::system_clock::now();
 
-  double result = 0.0; // init result
+  double result = 10.0; // init result
   int fid = atoi(argv[1]); // get function
   
   int a = atoi(argv[2]);
