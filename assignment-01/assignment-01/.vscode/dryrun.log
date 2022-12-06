@@ -1,0 +1,5 @@
+make: Entering directory `/Users/ddai/Dropbox (UNC Charlotte)/WorkDoc/Teaching/parallel-computing/1 - itcs5145-2022Fall/week-1/assignment-canvas'
+cc -O3 -std=c11 -fPIC   -c -o main.o main.c
+g++  main.o libfunctions.a -o main
+make: Leaving directory `/Users/ddai/Dropbox (UNC Charlotte)/WorkDoc/Teaching/parallel-computing/1 - itcs5145-2022Fall/week-1/assignment-canvas'
+ 
